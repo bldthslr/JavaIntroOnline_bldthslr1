@@ -1,0 +1,29 @@
+weapon; 1;
+<
+bow;500;1;
+longbow;700;1;
+crossbow;900;0.5;
+sword;500;1;
+longsword;700;1;
+dagger;400;1;
+axe;300;1;
+plate mail;1000;0.5;
+chain mail;700;1;
+>
+jewelry; 0.25;
+<
+brooch;1500;1
+ring;2500;1
+bowl;3000;0.7;
+amulet;5000;0.5;
+cup;7500;0.3;
+crown;12500;0.2;
+>
+artifacts; 0.1;
+<
+a potion of primordial substance;10000;1;
+the bottomless bag of the great traveler;10000;1;
+Medivh's staff;50000;0.5;
+demon Zodd wing;50000;0.5;
+the horn of the Unicorn King;70000;0.2;
+>

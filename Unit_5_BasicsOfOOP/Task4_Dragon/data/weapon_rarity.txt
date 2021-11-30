@@ -1,0 +1,12 @@
+-;;1;3;
+-;damaged;0.3;0.5;
+-;worn-out;0.5;1;
+-;battered;0.75;1;
+-;lightweight;1.1;0.5;
+-;good;2.7;0.2;
+-;powerful;2.9;0.2;
+-;heavy;3;0.2;
+-;enchanted;3.5;0.1;
++;of greater luck;9.35;0.1;
++;with fire glyph;10.1;0.1;
++;with frost glyph;10.1;0.1;
