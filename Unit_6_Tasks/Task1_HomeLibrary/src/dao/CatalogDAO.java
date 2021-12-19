@@ -14,8 +14,8 @@ import java.util.List;
 public class CatalogDAO {
     private List<String> content;
     private FileChanger booksFile;
-    public final char bookSeparator = (char) 30;
-    public final char fieldSeparator = (char) 31;
+    public final char BOOK_SEPARATOR = (char) 30;
+    public final char FIELD_SEPARATOR = (char) 31;
 
     // Конструктор
     public CatalogDAO() {
@@ -28,10 +28,10 @@ public class CatalogDAO {
 
     private boolean createContent() {
         try {
-            Collections.addAll(content, booksFile.read().split(Character.toString(bookSeparator)));
+            Collections.addAll(content, booksFile.read().split(Character.toString(BOOK_SEPARATOR)));
             for (int i = 0; i < content.size(); i++) {
                 if (!content.get(i).equals("") && !content.get(i).equals(System.lineSeparator())) {
-                    content.set(i, content.get(i) + bookSeparator);
+                    content.set(i, content.get(i) + BOOK_SEPARATOR);
                 }
             }
             return true;
@@ -44,26 +44,26 @@ public class CatalogDAO {
     // Создаем каталог
     private String bookToStr(Book book) {
         StringBuilder res = new StringBuilder();
-        res.append(book.getId()).append(fieldSeparator);
-        res.append(book.getTitle()).append(fieldSeparator);
-        res.append(book.getPublishing()).append(fieldSeparator);
-        res.append(book.getYear()).append(fieldSeparator);
-        res.append(book.getPages()).append(fieldSeparator);
-        res.append(book.getPrice()).append(fieldSeparator);
-        res.append(book.getBindingType()).append(fieldSeparator);
-        res.append(book.getType().toString()).append(fieldSeparator);
+        res.append(book.getId()).append(FIELD_SEPARATOR);
+        res.append(book.getTitle()).append(FIELD_SEPARATOR);
+        res.append(book.getPublishing()).append(FIELD_SEPARATOR);
+        res.append(book.getYear()).append(FIELD_SEPARATOR);
+        res.append(book.getPages()).append(FIELD_SEPARATOR);
+        res.append(book.getPrice()).append(FIELD_SEPARATOR);
+        res.append(book.getBindingType()).append(FIELD_SEPARATOR);
+        res.append(book.getType().toString()).append(FIELD_SEPARATOR);
         for (String author : book.getAuthors()) {
-            res.append(author).append(fieldSeparator);
+            res.append(author).append(FIELD_SEPARATOR);
         }
-        res.append(System.lineSeparator()).append(bookSeparator);
+        res.append(System.lineSeparator()).append(BOOK_SEPARATOR);
         return res.toString();
     }
 
     private Book strToBook (String str) {
         try {
             str = str.replaceAll(System.lineSeparator(), "");
-            str = str.replaceAll(Character.toString(bookSeparator), "");
-            String[] fields = str.split(Character.toString(fieldSeparator));
+            str = str.replaceAll(Character.toString(BOOK_SEPARATOR), "");
+            String[] fields = str.split(Character.toString(FIELD_SEPARATOR));
             int id = Integer.parseInt(fields[0]);
             String title = fields[1];
             String publishing = fields[2];

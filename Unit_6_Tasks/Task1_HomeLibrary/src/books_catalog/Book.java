@@ -105,7 +105,7 @@ public class Book {
         // Проходим по массиву
         for (int i = 0; i < authors.length; i++) {
             // Если нашли совпадение, то от текущего индекса делаем смещение и удаление последнего элемента
-            if (authors[i] == author) {
+            if (authors[i].equals(author)) {
                 for (int j = i; j < authors.length - 1; j++) {
                     authors[i] = authors[i + 1];
                 }

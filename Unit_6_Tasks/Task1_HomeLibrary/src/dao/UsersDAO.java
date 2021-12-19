@@ -11,8 +11,8 @@ public class UsersDAO {
     private List<User> users;
     private List<String> content;
     private FileChanger usersFile;
-    public final char userSeparator = (char) 30;
-    public final char attrSeparator = (char) 31;
+    public final char USER_SEPARATOR = (char) 30;
+    public final char ATTR_SEPARATOR = (char) 31;
 
     // Конструктор
     public UsersDAO() {
@@ -28,10 +28,10 @@ public class UsersDAO {
 
     private boolean createContent() {
         try {
-            Collections.addAll(content, usersFile.read().split(Character.toString(userSeparator)));
+            Collections.addAll(content, usersFile.read().split(Character.toString(USER_SEPARATOR)));
             for (int i = 0; i < content.size(); i++) {
                 if (!content.get(i).equals("") && !content.get(i).equals(System.lineSeparator())) {
-                    content.set(i, content.get(i) + userSeparator);
+                    content.set(i, content.get(i) + USER_SEPARATOR);
                 }
             }
             return true;
@@ -44,19 +44,19 @@ public class UsersDAO {
     // Создаем каталог
     private String userToStr(User user) {
         StringBuilder res = new StringBuilder();
-        res.append(user.getLogin()).append(attrSeparator);
-        res.append(user.getPassword_hash()).append(attrSeparator);
-        res.append(user.getEmail()).append(attrSeparator);
-        res.append(user.getRole().toString()).append(attrSeparator);
-        res.append(System.lineSeparator()).append(userSeparator);
+        res.append(user.getLogin()).append(ATTR_SEPARATOR);
+        res.append(user.getPassword_hash()).append(ATTR_SEPARATOR);
+        res.append(user.getEmail()).append(ATTR_SEPARATOR);
+        res.append(user.getRole().toString()).append(ATTR_SEPARATOR);
+        res.append(System.lineSeparator()).append(USER_SEPARATOR);
         return res.toString();
     }
 
     private User strToUser (String str) {
         try {
             str = str.replaceAll(System.lineSeparator(), "");
-            str = str.replaceAll(Character.toString(userSeparator), "");
-            String[] fields = str.split(Character.toString(attrSeparator));
+            str = str.replaceAll(Character.toString(USER_SEPARATOR), "");
+            String[] fields = str.split(Character.toString(ATTR_SEPARATOR));
             String login = fields[0];
             String password_hash = fields[1];
             String email = fields[2];
@@ -102,4 +102,26 @@ public class UsersDAO {
             return createCatalog();
         }
     }
+
+    public void refresh() {
+        StringBuilder res = new StringBuilder();
+        for (String str : content) {
+            res.append(str);
+        }
+        usersFile.refresh(res.toString());
+        this.users = createCatalog();
+    }
+
+    public boolean addUser(User user) {
+        try {
+            content.add(userToStr(user));
+            refresh();
+            return true;
+        }
+        catch (Exception e) {
+            return false;
+        }
+    }
+
+
 }
